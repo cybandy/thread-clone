@@ -31,7 +31,8 @@ const selected = ref(options[1])
 </script>
 
 <template>
-  <USelectMenu v-model="selected" :options="options" option-attribute="name" color="gray" variant="none">
+  <USelectMenu v-model="selected" :options="options" option-attribute="name" color="gray" variant="none"
+    :ui-menu="{ width: 'w-60', option: { padding: 'px-3 py-3' } }" :popper="{ placement: 'bottom-start' }">
     <template #option="{ option: item }">
       <button class="w-full h-full" @click="() => item.click(item)">{{ item.name }}</button>
     </template>

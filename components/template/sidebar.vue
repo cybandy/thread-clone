@@ -31,8 +31,7 @@ const links = [
 </script>
 
 <template>
-  <div
-    class="min-h-[480px] overflow-y-visible h-screen w-full backdrop-blur-lg flex flex-col items-center bg-gray-900/50">
+  <div class="flex flex-col items-center h-full">
     <div class="py-4">
       <ULink to="/">
         <UIcon name="ph:threads-logo" class="w-8 h-8" />
@@ -40,7 +39,7 @@ const links = [
     </div>
     <div class="flex-grow flex flex-col items-center justify-center">
       <UVerticalNavigation :links="(links as any)"
-        :ui="{ base: 'gap-0', padding: 'px-8 py-5', icon: { base: 'w-6 h-6' }, after: '' }">
+        :ui="{ base: 'gap-0', padding: 'p-[18px]', icon: { base: 'w-6 h-6' }, active: 'dark:before:bg-transparent dark:hover:before:bg-gray-800/50' }">
         <template #icon="{ link, isActive }">
           <UIcon class="w-6 h-6 z-[2]" :name="!isActive ? link.icon : link.activeIcon" />
         </template>
