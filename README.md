@@ -1,75 +1,17 @@
-# Nuxt 3 Minimal Starter
+# Thread Clone Project
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is a personal project to clone the frontend of [thread](https://threads.net).
 
-## Setup
+## Tech Stack
+<div style="display:flex; row-gap:16px; column-gap:4px; flex-wrap:wrap; align-items:center; justify-content:space-between">
+<img src="https://raw.githubusercontent.com/nuxt/modules/main/icons/nuxt.svg" width="80" alt="Nuxt" />
 
-Make sure to install the dependencies:
+<img src="https://ipx.nuxt.com/s_80,f_auto/gh/nuxt/modules/main/icons/tailwindcss.png" alt="tailwindcss" />
 
-```bash
-# npm
-npm install
+<img src="https://ipx.nuxt.com/s_80,f_auto/gh/nuxt/modules/main/icons/supabase.png" alt="supabase" />
 
-# pnpm
-pnpm install
+<img src="https://raw.githubusercontent.com/nuxt/modules/main/icons/pinia.svg" width=80 alt="Pinia" />
 
-# yarn
-yarn install
+<img src="https://www.prisma.io/docs/img/logo-white.svg" alt="Prisma" />
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+</div>
