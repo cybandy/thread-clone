@@ -5,6 +5,9 @@ useHead({
 // let posts = ref([])
 // let isPosts = ref(true)
 // let isLoading = ref(false)
+
+console.log(useNuxtApp().$notMobile.value);
+
 </script>
 
 <template>

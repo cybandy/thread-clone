@@ -20,13 +20,16 @@ export default defineNuxtConfig({
     // "assets": "/<srcDir>/assets",
     // "public": "/<srcDir>/public"
   },
-  modules: ["@nuxt/ui", "@nuxt/eslint", "@nuxt/fonts", // "@nuxtjs/supabase",
-    "@vite-pwa/nuxt", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image"],
+  modules: ["@nuxt/ui", "@nuxt/eslint", // "@nuxtjs/supabase",
+    "@nuxt/fonts", "@vite-pwa/nuxt", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image", "@nuxtjs/device"],
   ui: {
     global: true
   },
   colorMode: {
     preference: 'dark'
+  },
+  device: {
+    refreshOnResize: true
   }
 
 })

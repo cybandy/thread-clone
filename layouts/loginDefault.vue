@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-const { width } = useWindowSize()
+// const { width } = useWindowSize()
 
-const selMenu = ['For you']
+const notMobile = useNuxtApp().$notMobile
 </script>
 
 <template>
   <div>
     <!-- tablet,desktop -->
-    <div v-if="width >= 768" class="">
+    <div v-if="notMobile" class="">
       <!-- sidebar -->
       <div class="fixed top-0 min-h-[480px] h-screen w-[76px] backdrop-blur-lg bg-gray-900/10 z-[1]">
         <TemplateSidebar />

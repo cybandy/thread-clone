@@ -1,11 +1,12 @@
 <script setup lang='ts'>
-const { width } = useWindowSize()
+// const { width } = useWindowSize()
+const notMobile = useNuxtApp().$notMobile
 </script>
 
 <template>
   <div>
     <div class="w-full md:w-[640px] px-2 sm:px-4 md:px-0 mx-auto h-full flex flex-col gap-0 relative">
-      <div v-if="width >= 768"
+      <div v-if="notMobile"
         class="hidden md:flex items-center justify-center w-full min-h-[60px] h-fit sticky top-0 z-[1] bg-gray-950">
         <div class="absolute w-full h-9 top-12 overflow-clip">
           <div class="w-full h-full z-[1] flex justify-between overflow-hidden">
