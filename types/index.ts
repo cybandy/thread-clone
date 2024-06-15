@@ -11,3 +11,8 @@ export type Posts = {
   haslike: boolean,
   comments: number
 }
+
+export type FeedOption = {
+  id: number | string,
+  name: string
+}

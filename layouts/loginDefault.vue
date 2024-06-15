@@ -9,23 +9,14 @@ const selMenu = ['For you']
     <!-- tablet,desktop -->
     <div v-if="width >= 768" class="">
       <!-- sidebar -->
-      <div class="fixed top-0 min-h-[480px] h-screen w-[76px] backdrop-blur-lg bg-gray-900/10">
+      <div class="fixed top-0 min-h-[480px] h-screen w-[76px] backdrop-blur-lg bg-gray-900/10 z-[1]">
         <TemplateSidebar />
       </div>
 
       <!-- posts -->
       <div class="px-5 w-full">
         <div class="flex flex-col items-center w-full min-h-screen">
-          <div class="w-[640px] mx-auto h-full flex flex-col gap-2 relative">
-            <div class="flex items-center justify-center w-full h-fit">
-              <SelectMenu />
-            </div>
-            <!-- page content -->
-            <div
-              class="w-full h-full flex-grow overflow-x-hidden overflow-y-auto border-[0.5px] border-gray-700 box-border bg-gray-900 rounded-t-xl px-5 pt-2 overscroll-auto  will-change-[transform,scroll-position]">
-              <slot />
-            </div>
-          </div>
+          <slot />
         </div>
       </div>
 
@@ -43,4 +34,12 @@ const selMenu = ['For you']
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#content_container {
+  perspective: 1px;
+  perspective-origin: right top;
+  transform-style: preserve-3d;
+  scrollbar-width: none;
+
+}
+</style>

@@ -8,16 +8,21 @@ useHead({
 </script>
 
 <template>
-  <div id="IndexPage" class="w-full">
-    <div id="Posts" class="px-4">
-      <Posts />
-      <Posts />
-      <Posts />
-      <Posts />
-      <Posts />
-    </div>
+  <TemplateSectionContent>
+    <template #header>
+      <SelectMenu />
+    </template>
+    <div id="IndexPage" class="w-full">
+      <div id="Posts" class="px-4">
+        <Posts />
+        <Posts />
+        <Posts />
+        <Posts />
+        <Posts />
+      </div>
 
-  </div>
+    </div>
+  </TemplateSectionContent>
 </template>
 
 <style scoped></style>

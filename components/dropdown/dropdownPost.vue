@@ -56,8 +56,7 @@ const menu_items = [
 
 <template>
   <UDropdown :items="menu_items">
-    <UButton icon="i-heroicons-ellipsis-horizontal-20-solid" color="gray" variant="ghost"
-      :ui="{ rounded: 'rounded-full', color: { gray: { ghost: 'dark:hover:bg-gray-900/60' } } }" />
+    <UButton icon="i-heroicons-ellipsis-horizontal-20-solid" color="gray" variant="ghost" />
     <template #item="{ item }">
       <span class="truncate">{{ item.label }}</span>
 

@@ -45,19 +45,23 @@ const menu_items = [
     },
   ]
 ]
+
+const open = ref(false)
 </script>
 
 <template>
-  <UDropdown :items="menu_items">
-    <UTooltip text="More">
-      <UButton :icon="icon" color="gray" variant="ghost" />
-    </UTooltip>
-    <template #item="{ item }">
-      <span class="truncate">{{ item.label }}</span>
+  <UTooltip text="More" :prevent="open">
+    <UDropdown :open="open" :items="menu_items">
 
-      <UIcon :name="item.icon" class="flex-shrink-0 h-5 w-5 ms-auto" />
-    </template>
-  </UDropdown>
+      <UButton :icon="icon" color="gray" variant="ghost" />
+
+      <template #item="{ item }">
+        <span class="truncate">{{ item.label }}</span>
+
+        <UIcon v-if="item.icon" :name="item.icon ?? ''" class="flex-shrink-0 h-5 w-5 ms-auto" />
+      </template>
+    </UDropdown>
+  </UTooltip>
 </template>
 
 <style scoped></style>
