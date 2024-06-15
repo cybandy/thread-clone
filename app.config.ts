@@ -21,7 +21,7 @@ export default defineAppConfig({
         },
         modal: {
             overlay: {
-                background: 'dark:bg-gray-950/30'
+                background: 'dark:bg-black/70'
             }
         },
         button: {

@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-// const { width } = useWindowSize()
+import { ModalNewPostDesktop } from "#components"
+const { isNewPost } = storeToRefs(usePostStore())
+
+const modal = useModal()
+function openNewPostModal() {
+  modal.open(ModalNewPostDesktop, {
+
+  })
+}
 
 const notMobile = useNuxtApp().$notMobile
 </script>
@@ -21,7 +29,7 @@ const notMobile = useNuxtApp().$notMobile
       </div>
 
       <!-- add posts fixed button -->
-      <button
+      <button @click="openNewPostModal"
         class="w-[82px] h-[68px] fixed flex items-center justify-center m-0 p-0 bottom-6 right-6 rounded-2xl border-[0.5px] border-gray-700 box-border bg-gray-900">
         <UIcon name="i-heroicons-plus-20-solid" class="w-6 h-6" />
       </button>

@@ -5,7 +5,8 @@ const notMobile = useNuxtApp().$notMobile
 
 <template>
   <div>
-    <div class="w-full md:w-[640px] px-2 sm:px-4 md:px-0 mx-auto h-full flex flex-col gap-0 relative">
+    <div
+      class="w-full md:min-w-[590px] md:max-w-[640px] lg:min-w-[640px] px-2 sm:px-4 md:px-0 mx-auto h-full flex flex-col gap-0 relative">
       <div v-if="notMobile"
         class="hidden md:flex items-center justify-center w-full min-h-[60px] h-fit sticky top-0 z-[1] bg-gray-950">
         <div class="absolute w-full h-9 top-12 overflow-clip">

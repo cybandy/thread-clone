@@ -20,7 +20,8 @@ export const usePostStore = defineStore({
       },
 
     ] as FeedOption[],
-    selectedFeed: {} as FeedOption
+    selectedFeed: {} as FeedOption,
+    isNewPost: false,
   }),
   getters: {
     isPosts: (state) => state.posts.length > 0
