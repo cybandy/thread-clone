@@ -10,7 +10,12 @@ useHead({
 <template>
   <TemplateSectionContent>
     <template #header>
-      <SelectMenu />
+      <div class="hidden md:block">
+        <SelectMenu />
+      </div>
+      <div class="md:hidden">
+        <SelectMenuMobile />
+      </div>
     </template>
     <div id="IndexPage" class="w-full">
       <div id="Posts" class="px-4">
