@@ -44,7 +44,7 @@ const { x, y } = useWindowScroll()
       <div class="flex-grow md:flex-grow-0">
         <ClientOnly>
           <UButton color="black" :variant="width < 768 ? 'outline' : 'solid'" label="Log in" to="/login"
-            :block="width < 768" />
+            :block="width < 768" :ui="{ variant: { outline: 'ring-current' } }" />
           <template #fallback>
             <span class="w-full h-full inline-block" />
           </template>

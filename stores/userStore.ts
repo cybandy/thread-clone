@@ -7,11 +7,12 @@ export const useUserStore = defineStore({
     isMenuOverlay: false,
     isLogoutOverlay: false,
     isSearchOverlay: false,
-    user: {}
+    user: {},
+    isLoggedIn: true
   }),
   getters: {
     // isPosts: (state) => state.posts.length > 0
-    isLoggedIn: (state) => Boolean(1)
+    // isLoggedIn: (state) => Boolean(0)
   },
   actions: {}
 })

@@ -3,24 +3,28 @@ const userStore = useUserStore()
 const links = [
   {
     icon: 'ph:house',
+    activeIcon: 'ph:house-fill',
     to: '/',
     // label:'Home'
   },
   {
-    icon: 'ph:magnifying-glass-bold',
-    click: () => {
-      console.log('search clicked');
+    icon: 'ph:magnifying-glass',
+    activeIcon: 'ph:magnifying-glass-bold',
+    to: '/search',
 
-    },
   },
   {
-    icon: 'ph:plus-bold',
+    icon: 'ph:plus',
+    activeIcon: 'ph:plus-bold',
   },
   {
-    icon: 'ph:heart'
+    icon: 'ph:heart',
+    activeIcon: 'ph:heart-fill',
+    to: '/activities'
   },
   {
-    icon: 'i-heroicons-user'
+    icon: 'i-heroicons-user',
+    activeIcon: 'i-heroicons-user-20-solid'
   }
 ]
 </script>
@@ -29,6 +33,12 @@ const links = [
   <div id="bottomNav" class="fixed z-10 bottom-0 flex w-full h-[70px] border-t-gray-700 bg-gray-950 mx-auto">
 
     <UHorizontalNavigation :links="(links as any)"
-      :ui="{ container: 'min-w-full', inner: 'min-w-0 flex-grow', base: 'justify-center', after: '', icon: { base: 'w-[35px] h-[35px]' } }" />
+      :ui="{ container: 'min-w-full', inner: 'min-w-0 flex-grow', base: 'justify-center', after: '', icon: { base: 'w-[26px] h-[26px]' } }">
+
+      <template #icon="{ link, isActive }">
+        <UIcon :name="isActive ? link.activeIcon : link.icon" class="w-6 h-6" />
+      </template>
+
+    </UHorizontalNavigation>
   </div>
 </template>

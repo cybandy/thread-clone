@@ -29,7 +29,14 @@ const selMenu = ['For you']
 
     <!-- mobile -->
     <div v-else class="will-change-auto">
-      <slot />
+
+      <TemplateHeaderLoggedIn />
+
+      <div>
+        <slot />
+      </div>
+
+      <TemplateFooterBottomBar />
     </div>
   </div>
 </template>
