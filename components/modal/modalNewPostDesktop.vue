@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { ThreadFormProp } from '~/types';
+
 const { isNewPost } = storeToRefs(usePostStore())
 
 const viewItems = [
@@ -18,8 +20,42 @@ const viewItems = [
     msg: 'Profiles you mention can reply & quote'
   },
 ]
-const selectedViewers = ref(0)
-const thread_text = ref('')
+const selectedViewers = ref(viewItems[0])
+// const thread_text = ref('')
+
+const threads = ref([
+  {
+    thread_text: '',
+    ind: 0,
+    isAddThread: false,
+    imgFile: undefined
+  }
+
+] as ThreadFormProp[])
+
+function addThreadFunc(data: any) {
+  console.log('add new thread from parent component', data)
+  threads.value.push({
+    thread_text: '',
+    isAddThread: false,
+    ind: threads.value.length,
+    imgFile: undefined
+  })
+}
+
+function deleteThreadFunc(ind: number) {
+  threads.value[0].isAddThread = false
+  threads.value.splice(ind, 1)
+}
+
+const disablePostButton = computed(() => threads.value.some((x) => typeof x.thread_text === 'string' && x.thread_text.length === 0))
+
+// submit data
+async function submit() {
+  console.log(threads.value)
+  console.log(selectedViewers.value);
+
+}
 </script>
 
 <template>
@@ -47,46 +83,32 @@ const thread_text = ref('')
           }
         }">
 
-          <div class="grid grid-cols-[48px_minmax(0,1fr)] grid-rows-[21px_minmax(19px,1fr)_42px_1fr]">
-            <!-- profile picture -->
-            <div class="row-start-1 row-end-2 col-start-1 mt-2">
-              <UAvatar src="/dp_placeholder.jpg" alt="username" />
-            </div>
-            <!-- username -->
-            <div class="col-start-2 row-start-1 flex items-center">
-              <span class="font-semibold text-wrap overflow-visible">
-                boatinquami
-              </span>
-            </div>
-            <!-- text & icons-->
-            <div class="col-start-2 row-start-2">
-              <UTextarea v-model="thread_text" variant="none" :rows="1" placeholder="Start a thread..." autoresize
-                :ui="{ padding: { sm: 'sm:px-0' } }" />
-
-              <div class="mt-2 ml-2 w-full flex items-center">
-                <button class="flex items-center justify-center w-9 h-9">
-
-                </button>
-              </div>
-            </div>
-
-            <!-- add thread -->
+          <div class="space-y-1.5">
+            <FormsNewThreadsDesktop v-for="(data, ind) of threads" :key="ind" v-model:thread_text="data.thread_text"
+              v-model:is-add-thread="data.isAddThread" v-model:img-file="data.imgFile" :ind="ind"
+              @add-new-thread="addThreadFunc" @delete-thread="() => deleteThreadFunc(ind)" />
           </div>
 
           <template #footer>
-            <UDropdown :items="(viewItems as any)" :popper="{ placement: 'bottom' }">
-              <span class="block cursor-pointer text-gray-500 relative">
-                {{ viewItems[selectedViewers || 0].msg }}
-              </span>
-            </UDropdown>
 
-            <UButton :disabled="thread_text.length == 0" label="Post" variant="outline" color="gray" :ui="{
+            <USelectMenu v-model="selectedViewers" variant="none" color="gray" :options="viewItems"
+              option-attribute="label" :ui="{ background: 'dark:bg-gray-900' }">
+              <template #default>
+                <span class="text-wrap text-gray-500 cursor-pointer">
+                  {{ selectedViewers.msg }}
+                </span>
+              </template>
+
+
+            </USelectMenu>
+
+            <UButton :disabled="disablePostButton" label="Post" variant="outline" color="gray" :ui="{
               font: 'font-semibold',
               padding: {
                 sm: 'px-4',
               },
               rounded: 'rounded-[10px]'
-            }" />
+            }" @click="submit" />
           </template>
         </UCard>
       </div>

@@ -16,3 +16,10 @@ export type FeedOption = {
   id: number | string,
   name: string
 }
+
+export type ThreadFormProp = {
+  thread_text?: string,
+  isAddThread?: boolean,
+  ind: number,
+  imgFile?: File
+}

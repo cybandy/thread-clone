@@ -30,6 +30,11 @@ export default defineAppConfig({
                     sm: 'w-6 h-6'
                 }
             }
+        },
+        avatar: {
+            size: {
+                sm: 'w-9 h-9 text-sm'
+            }
         }
 
     }
