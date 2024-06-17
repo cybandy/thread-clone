@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import type { ThreadFormImage } from '~/types';
 const props = defineProps({
   thread_text: {
     type: String,
@@ -14,7 +15,10 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  imgFile: File
+  imgFiles: {
+    type: Array<ThreadFormImage>,
+    default: []
+  }
 
 })
 
@@ -43,34 +47,50 @@ function deleteThreadFunc() {
 }
 // disable add thread button if no img is selected or if 
 // there is no text
-const disable_add_thread = computed(() => thread_text.value.length == 0 && typeof imgFile.value === 'undefined')
+const disable_add_thread = computed(() => thread_text.value.length == 0 && typeof imgFiles.value === 'undefined')
 
 /**
  * Handling image file upload
  */
-const imgFile = computed({
+const imgFiles = computed({
   set: (val) => emits('update:imgFile', val),
-  get: () => props.imgFile
+  get: () => props.imgFiles
 })
 const tempImgUrl = ref('')
 // vueUse useFileDialog
-const { files, open: hookImageFile, reset, onChange } = useFileDialog({ accept: 'image/*' })
+const { files: __files, open: hookImageFile, reset, onChange } = useFileDialog({ accept: 'image/*', reset: true })
+
+const imageKey = ref(Date.now())
 
 onChange((files) => {
   if (files) {
-    imgFile.value = files[0]
-    tempImgUrl.value = URL.createObjectURL(files[0])
-    console.log(files);
-    console.log(imgFile.value)
+    // let temp = [] as ThreadFormImage[]
+    for (let i = 0; i < files.length; i++) {
+      const _file = files[i];
+      imgFiles.value.push({
+        file: _file,
+        src: URL.createObjectURL(_file),
+        alt: ''
+      })
+
+    }
   }
+  imageKey.value = Date.now()
 })
-// show img element
-const showImageMedia = computed(() => tempImgUrl.value.length > 0)
+
 // remove image
-function removeImage() {
-  tempImgUrl.value = ''
-  imgFile.value = undefined
+function removeImage(ind: number) {
+  imgFiles.value?.splice(ind, 1)
+  imageKey.value = Date.now()
 }
+
+// reset images upon closing modal
+const { isNewPost } = storeToRefs(usePostStore())
+watch(isNewPost, () => {
+  imgFiles.value.splice(0, imgFiles.value.length)
+
+  imageKey.value = Date.now()
+}, { deep: true })
 </script>
 
 <template>
@@ -94,16 +114,10 @@ function removeImage() {
         :placeholder="ind > 0 ? 'Say more...' : 'Start a thread...'" autoresize :ui="{ padding: { sm: 'sm:px-0' } }" />
 
       <!-- media -->
-      <div v-if="showImageMedia" class="relative">
-        <UButton @click="removeImage" class="absolute top-2.5 right-2.5" icon="i-heroicons-x-mark-20-solid" color="gray"
-          :ui="{ rounded: 'rounded-full', color: { gray: { solid: 'dark:bg-gray-500/50 backdrop-blur-xl dark:ring-gray-500' } } }" />
-
-        <UButton class="absolute bottom-2.5 left-2.5" label="Alt" color="gray"
-          :ui="{ rounded: 'rounded-full', color: { gray: { solid: 'dark:bg-gray-500/50 backdrop-blur-xl dark:ring-gray-500' } } }" />
-
-        <NuxtImg :src="tempImgUrl"
-          class="max-w-full max-h-full rounded-lg box-border pointer-events-none outline-offset-1 outline-1 border-0 aspect-postImg object-cover" />
+      <div v-show="imgFiles.length > 0" class="pt-3" :key="imageKey">
+        <PostsImages @remove-image="removeImage" v-model:images="imgFiles" is-form />
       </div>
+
       <div />
 
       <div class="mt-2 ml-2 w-full flex items-center text-gray-500">
@@ -144,3 +158,5 @@ function removeImage() {
     </div>
   </div>
 </template>
+
+<style scoped></style>

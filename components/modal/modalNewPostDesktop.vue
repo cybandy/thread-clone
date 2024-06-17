@@ -28,7 +28,7 @@ const threads = ref([
     thread_text: '',
     ind: 0,
     isAddThread: false,
-    imgFile: undefined
+    imgFiles: undefined
   }
 
 ] as ThreadFormProp[])
@@ -39,7 +39,7 @@ function addThreadFunc(data: any) {
     thread_text: '',
     isAddThread: false,
     ind: threads.value.length,
-    imgFile: undefined
+    imgFiles: undefined
   })
 }
 
@@ -56,6 +56,19 @@ async function submit() {
   console.log(selectedViewers.value);
 
 }
+
+watch(isNewPost, () => {
+  if (!isNewPost.value) {
+    threads.value = [
+      {
+        thread_text: '',
+        isAddThread: false,
+        ind: threads.value.length,
+        imgFiles: undefined
+      }
+    ]
+  }
+})
 </script>
 
 <template>
@@ -85,7 +98,7 @@ async function submit() {
 
           <div class="space-y-1.5">
             <FormsNewThreadsDesktop v-for="(data, ind) of threads" :key="ind" v-model:thread_text="data.thread_text"
-              v-model:is-add-thread="data.isAddThread" v-model:img-file="data.imgFile" :ind="ind"
+              v-model:is-add-thread="data.isAddThread" v-model:img-files="data.imgFiles" :ind="ind"
               @add-new-thread="addThreadFunc" @delete-thread="() => deleteThreadFunc(ind)" />
           </div>
 

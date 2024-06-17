@@ -1,3 +1,9 @@
+
+export type PostImage = {
+  src: string,
+  alt?: string
+}
+
 export type Posts = {
   author: {
     name: string,
@@ -17,9 +23,12 @@ export type FeedOption = {
   name: string
 }
 
+export type ThreadFormImage = {
+  file?: File
+} & PostImage
 export type ThreadFormProp = {
   thread_text?: string,
   isAddThread?: boolean,
   ind: number,
-  imgFile?: File
+  imgFiles?: Array<ThreadFormImage>
 }

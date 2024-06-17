@@ -4,9 +4,10 @@ const { isNewPost } = storeToRefs(usePostStore())
 
 const modal = useModal()
 function openNewPostModal() {
-  modal.open(ModalNewPostDesktop, {
+  // modal.open(ModalNewPostDesktop, {
 
-  })
+  // })
+  isNewPost.value = true
 }
 
 const notMobile = useNuxtApp().$notMobile
@@ -46,6 +47,7 @@ const notMobile = useNuxtApp().$notMobile
 
       <TemplateFooterBottomBar />
     </div>
+    <ModalNewPostDesktop />
   </div>
 </template>
 
