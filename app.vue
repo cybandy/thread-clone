@@ -1,16 +1,21 @@
 <script lang="ts" setup>
 const userStore = useUserStore()
 const { isLoggedIn } = storeToRefs(userStore)
+const canvas_path = ['/login', 'canvas']
 </script>
 
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <NuxtLayout :name="isLoggedIn ? 'login-default' : 'logout-default'">
-      <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator />
+    <NuxtLayout v-if="canvas_path.includes($route.path)">
       <NuxtPage />
-      <UNotifications />
-      <UModals />
     </NuxtLayout>
+
+    <NuxtLayout v-else :name="isLoggedIn ? 'login-default' : 'logout-default'">
+      <NuxtPage />
+    </NuxtLayout>
+    <UNotifications />
+    <UModals />
   </div>
 </template>

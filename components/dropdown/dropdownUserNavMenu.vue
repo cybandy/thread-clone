@@ -7,7 +7,7 @@ defineProps({
     default: 'i-heroicons-bars-3-bottom-right'
   }
 })
-
+const supaClient = useSupabaseClient()
 const toasts = useToast()
 const menu_items = [
   [
@@ -41,6 +41,10 @@ const menu_items = [
     {
       label: 'Log out',
       click: async () => {
+        const { error } = await supaClient.auth.signOut()
+        if (!error) {
+          navigateTo('/', { external: true })
+        }
       },
     },
   ]

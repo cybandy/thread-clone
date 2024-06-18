@@ -56,6 +56,12 @@ async function submit() {
   console.log(selectedViewers.value);
 
 }
+
+onMounted(() => {
+  const user = useSupabaseUser()
+  console.log(user.value);
+
+})
 </script>
 
 <template>

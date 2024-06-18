@@ -14,15 +14,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   alias: {
     '#cy/types': fileURLToPath(new URL('./types/index.ts', import.meta.url)),
-    // "~": "/<srcDir>",
-    // "@": "/<srcDir>",
-    // "~~": "/<rootDir>",
-    // "@@": "/<rootDir>",
-    // "assets": "/<srcDir>/assets",
-    // "public": "/<srcDir>/public"
   },
-  modules: ["@nuxt/ui", "@nuxt/eslint", // "@nuxtjs/supabase",
-    "@nuxt/fonts", "@vite-pwa/nuxt", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image", "@nuxtjs/device"],
+  modules: ["@nuxt/ui", "@nuxt/eslint", "@nuxtjs/supabase", "@nuxt/fonts", "@vite-pwa/nuxt", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/image", "@nuxtjs/device", '@pinia-plugin-persistedstate/nuxt'],
   ui: {
     global: true,
     icons: {
@@ -61,6 +54,15 @@ export default defineNuxtConfig({
   },
   device: {
     refreshOnResize: true
+  },
+  supabase: {
+    // redirectOptions:{
+    //   exclude:['/','/log']
+    // }
+    redirect: false
+  },
+  experimental: {
+    inlineRouteRules: true
   }
 
 })
