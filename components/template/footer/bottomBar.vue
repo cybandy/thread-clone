@@ -28,7 +28,8 @@ const links = [
   },
   {
     icon: 'i-heroicons-user',
-    activeIcon: 'i-heroicons-user-20-solid'
+    activeIcon: 'i-heroicons-user-20-solid',
+    to: `/@${userStore.user.username}`
   }
 ]
 </script>

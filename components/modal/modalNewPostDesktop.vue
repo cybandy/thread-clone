@@ -74,6 +74,9 @@ watch(isNewPost, () => {
  * Mobile view
  */
 const notMobile = useNuxtApp().$notMobile
+
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 </script>
 
 <template>
@@ -111,6 +114,7 @@ const notMobile = useNuxtApp().$notMobile
 
           <div class="space-y-1.5">
             <FormsNewThreadsDesktop v-for="(data, ind) of threads" :key="ind" v-model:thread_text="data.thread_text"
+              :dp="user.avatar_url || '/dp_placeholder.jpg'" :username="user.username || ''"
               v-model:is-add-thread="data.isAddThread" v-model:img-files="data.imgFiles" :ind="ind"
               @add-new-thread="addThreadFunc" @delete-thread="() => deleteThreadFunc(ind)" />
           </div>

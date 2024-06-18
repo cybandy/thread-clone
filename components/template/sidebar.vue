@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 const links = [
   {
     icon: 'ph:house',
@@ -25,7 +27,7 @@ const links = [
     activeIcon: 'i-heroicons-user-solid',
     click: () => {
     },
-    to: '/user'
+    to: '/@' + user.value.username
   },
 ]
 </script>

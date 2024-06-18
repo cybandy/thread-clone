@@ -30,6 +30,9 @@ export default defineAppConfig({
                 size: {
                     sm: 'w-6 h-6'
                 }
+            },
+            variant: {
+                outline: 'dark:focus-visible:ring-{color}-600 dark:hover:bg-transparent'
             }
         },
         avatar: {

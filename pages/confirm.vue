@@ -9,7 +9,7 @@ defineRouteRules({
 watch(user, () => {
   if (user.value) {
     userStore.isLoggedIn = true
-    console.log(user.value);
+    // userStore.myProfile()
     // Redirect to protected page
     return navigateTo('/')
   } else {

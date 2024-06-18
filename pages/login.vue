@@ -41,8 +41,8 @@ onMounted(() => {
       </h1>
       <p class="text-gray-500" />
     </div>
-    <div class="flex items-center justify-center">
-      <UButton @click="() => loginOauth('github')" color="black" label="GitHub" icon="i-simple-icons-github" block />
+    <div class="flex items-center justify-center h-full w-full">
+      <UButton color="black" label="GitHub" icon="i-simple-icons-github" block @click="() => loginOauth('github')" />
       <!-- <UButton color="black" label="Login with Google" icon="i-simple-icons-google" block /> -->
 
     </div>

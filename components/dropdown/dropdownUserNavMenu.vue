@@ -43,6 +43,7 @@ const menu_items = [
       click: async () => {
         const { error } = await supaClient.auth.signOut()
         if (!error) {
+          await useNuxtApp().$resetStores()
           navigateTo('/', { external: true })
         }
       },

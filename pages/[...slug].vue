@@ -57,11 +57,10 @@ async function submit() {
 
 }
 
-onMounted(() => {
-  const user = useSupabaseUser()
-  console.log(user.value);
+// onMounted(() => {
+//   console.log(useRoute());
 
-})
+// })
 </script>
 
 <template>

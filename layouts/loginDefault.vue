@@ -11,6 +11,9 @@ function openNewPostModal() {
 }
 
 const notMobile = useNuxtApp().$notMobile
+
+
+
 </script>
 
 <template>
@@ -22,9 +25,9 @@ const notMobile = useNuxtApp().$notMobile
         <TemplateSidebar />
       </div>
 
-      <!-- posts -->
+      <!-- content -->
       <div class="px-5 w-full">
-        <div class="flex flex-col items-center w-full min-h-screen">
+        <div class="flex flex-col items-center w-full min-h-screen h-screen">
           <slot />
         </div>
       </div>
@@ -37,11 +40,11 @@ const notMobile = useNuxtApp().$notMobile
     </div>
 
     <!-- mobile -->
-    <div v-else class="will-change-auto">
+    <div v-else class="h-screen min-h-screen">
 
       <TemplateHeaderLoggedIn />
 
-      <div>
+      <div class="h-full w-full">
         <slot />
       </div>
 
