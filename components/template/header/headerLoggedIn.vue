@@ -1,11 +1,11 @@
 <script setup lang='ts'>
-
+const showBackButton = ref(false)
 </script>
 
 <template>
   <UContainer class="h-[60px] grid grid-cols-4 w-full sticky top-0 bg-gray-900/85 backdrop:blur-xl z-10">
     <div class="flex items-center">
-      <ULink to="/">
+      <ULink v-show="showBackButton" to="/">
         <UIcon name="i-heroicons-arrow-left" class="w-5 h-5" aria-label="back" />
       </ULink>
     </div>

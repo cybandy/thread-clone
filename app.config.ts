@@ -22,7 +22,8 @@ export default defineAppConfig({
         modal: {
             overlay: {
                 background: 'dark:bg-black/70'
-            }
+            },
+            fullscreen: 'w-screen h-screen max-h-screen overflow-y-auto'
         },
         button: {
             icon: {

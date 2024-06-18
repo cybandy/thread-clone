@@ -16,6 +16,10 @@ const links = [
   {
     icon: 'ph:plus',
     activeIcon: 'ph:plus-bold',
+    click: () => {
+      const { isNewPost } = storeToRefs(usePostStore())
+      isNewPost.value = true
+    }
   },
   {
     icon: 'ph:heart',

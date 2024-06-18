@@ -9,7 +9,7 @@ const links = [
     icon: 'ph:magnifying-glass',
     activeIcon: 'ph:magnifying-glass-bold',
     click: () => {
-      alert('searching...')
+
     },
     to: '/search'
   },
