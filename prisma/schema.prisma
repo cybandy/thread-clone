@@ -10,6 +10,14 @@ datasource db {
   schemas   = ["auth", "public"]
 }
 
+// generate zod schema for api validation
+// generator zod {
+//   provider          = "prisma-zod-generator"
+//   output            = "../server/types/gen_zod_schemas"
+//   isGenerateSelect  = true
+//   isGenerateInclude = true
+// }
+
 model Profiles {
   id           Int      @id @default(autoincrement())
   createdAt    DateTime @default(now())
@@ -77,6 +85,7 @@ model Follow {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model audit_log_entries {
   instance_id String?   @db.Uuid
   id          String    @id @db.Uuid
@@ -89,6 +98,7 @@ model audit_log_entries {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model flow_state {
   id                     String                @id @db.Uuid
   user_id                String?               @db.Uuid
@@ -111,6 +121,7 @@ model flow_state {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model identities {
   provider_id     String
   user_id         String    @db.Uuid
@@ -130,6 +141,7 @@ model identities {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model instances {
   id              String    @id @db.Uuid
   uuid            String?   @db.Uuid
@@ -141,6 +153,7 @@ model instances {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model mfa_amr_claims {
   session_id            String   @db.Uuid
   created_at            DateTime @db.Timestamptz(6)
@@ -154,6 +167,7 @@ model mfa_amr_claims {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model mfa_challenges {
   id          String      @id @db.Uuid
   factor_id   String      @db.Uuid
@@ -167,6 +181,7 @@ model mfa_challenges {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model mfa_factors {
   id             String           @id @db.Uuid
   user_id        String           @db.Uuid
@@ -185,6 +200,7 @@ model mfa_factors {
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// @@Gen.model(hide: true)
 model one_time_tokens {
   id         String              @id @db.Uuid
   user_id    String              @db.Uuid
@@ -202,6 +218,7 @@ model one_time_tokens {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model refresh_tokens {
   instance_id String?   @db.Uuid
   id          BigInt    @id @default(autoincrement())
@@ -224,6 +241,7 @@ model refresh_tokens {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model saml_providers {
   id                String        @id @db.Uuid
   sso_provider_id   String        @db.Uuid
@@ -242,6 +260,7 @@ model saml_providers {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model saml_relay_states {
   id              String        @id @db.Uuid
   sso_provider_id String        @db.Uuid
@@ -261,6 +280,7 @@ model saml_relay_states {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model schema_migrations {
   version String @id @db.VarChar(255)
 
@@ -268,6 +288,7 @@ model schema_migrations {
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// @@Gen.model(hide: true)
 model sessions {
   id             String           @id @db.Uuid
   user_id        String           @db.Uuid
@@ -293,6 +314,7 @@ model sessions {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// @@Gen.model(hide: true)
 model sso_domains {
   id              String        @id @db.Uuid
   sso_provider_id String        @db.Uuid
@@ -308,6 +330,7 @@ model sso_domains {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// @@Gen.model(hide: true)
 model sso_providers {
   id                String              @id @db.Uuid
   resource_id       String?
@@ -323,6 +346,7 @@ model sso_providers {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// @@Gen.model(hide: true)
 model users {
   instance_id                 String?           @db.Uuid
   id                          String            @id @db.Uuid
@@ -370,6 +394,7 @@ model users {
   @@schema("auth")
 }
 
+/// @@Gen.model(hide: true)
 enum aal_level {
   aal1
   aal2
@@ -378,6 +403,7 @@ enum aal_level {
   @@schema("auth")
 }
 
+/// @@Gen.model(hide: true)
 enum code_challenge_method {
   s256
   plain
@@ -385,6 +411,7 @@ enum code_challenge_method {
   @@schema("auth")
 }
 
+/// @@Gen.model(hide: true)
 enum factor_status {
   unverified
   verified
@@ -392,6 +419,7 @@ enum factor_status {
   @@schema("auth")
 }
 
+/// @@Gen.model(hide: true)
 enum factor_type {
   totp
   webauthn
@@ -399,6 +427,7 @@ enum factor_type {
   @@schema("auth")
 }
 
+/// @@Gen.model(hide: true)
 enum one_time_token_type {
   confirmation_token
   reauthentication_token
