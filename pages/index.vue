@@ -21,12 +21,19 @@ useHead({
       </div>
     </template>
     <div id="IndexPage" class="w-full">
-      <div id="Posts" class="px-4">
-        <Posts />
-        <Posts />
-        <Posts />
-        <Posts />
-        <Posts />
+      <div class="grid">
+        <div class="w-full border-b-[0.5px] border-gray-700/80">
+          <Posts />
+        </div>
+        <div class="w-full border-b-[0.5px] border-gray-700/80">
+          <Posts />
+        </div>
+        <div class="w-full border-b-[0.5px] border-gray-700/80">
+          <Posts />
+        </div>
+        <div class="w-full border-b-[0.5px] border-gray-700/80">
+          <Posts />
+        </div>
       </div>
 
     </div>

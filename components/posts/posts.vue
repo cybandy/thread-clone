@@ -46,7 +46,7 @@ const post_buttons = computed(() => (
 </script>
 
 <template>
-  <div class="w-full py-3 border-b border-b-gray-700">
+  <div class="w-full py-3 px-3 md:px-6">
     <div class="w-full grid grid-cols-[48px_minmax(0,1fr)] grid-rows-[21px_19px_max-content_max-content]">
 
       <div class="pt-1">
