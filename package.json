@@ -13,6 +13,7 @@
     "@vite-pwa/nuxt": "^0.8.0",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
+    "@zenstackhq/runtime": "2.2.3",
     "nuxt": "^3.12.1",
     "prisma": "^5.15.0",
     "uuid": "^10.0.0",
@@ -27,5 +28,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "zenstack": "2.2.3"
+  }
 }
