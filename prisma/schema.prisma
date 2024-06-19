@@ -93,6 +93,8 @@ model Thread {
   createdAt  DateTime         @default(now())
   text       String?
   images     Images[]
+  /// @url
+  giph       String?
   Author     Profile?         @relation(fields: [author_id], references: [id])
   author_id  String           @db.Uuid()
   likes      Like[]
