@@ -23,7 +23,7 @@ const loginOauth = async (prov: any) => {
       }
 
     })
-  // console.log(data);
+  console.log(data.url);
 
 }
 

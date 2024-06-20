@@ -6,10 +6,21 @@ defineRouteRules({
   ssr: false
 })
 
-watch(user, () => {
+// function to upsert user's profile
+async function inUpdateProfile() {
+  const d = await $fetch('/api/profile', {
+    method: 'patch',
+    headers: useRequestHeaders(['cookie'])
+  })
+}
+
+watch(user, async () => {
   if (user.value) {
     userStore.isLoggedIn = true
+
+    await inUpdateProfile()
     // userStore.myProfile()
+
     // Redirect to protected page
     return navigateTo('/')
   } else {

@@ -57,10 +57,21 @@ async function submit() {
 
 }
 
-// onMounted(() => {
-//   console.log(useRoute());
+async function inUpdateProfile() {
+  const d = await $fetch('/api/profile', {
+    // query: {
+    //   where: {
+    //     id: useSupabaseUser().value?.id
+    //   }
+    // },
+    method: 'patch',
+    headers: useRequestHeaders(['cookie'])
+  })
+  console.log(d)
+}
 
-// })
+// console.log(useSupabaseUser().value);
+await $fetch
 </script>
 
 <template>
@@ -117,6 +128,10 @@ async function submit() {
             </template>
           </UCard>
         </div>
+      </div>
+
+      <div>
+        <UButton @click="inUpdateProfile" color='black' label="fetch" />
       </div>
     </TemplateSectionContent>
   </div>
