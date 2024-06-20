@@ -13,7 +13,7 @@ datasource db {
 /// My Models
 
 model Profile {
-  id           String   @id @db.Uuid
+  id           String   @id @db.Uuid @default(auth().id)
   createdAt    DateTime @default(now())
   description  String?
   has_verified Boolean  @default(false)
