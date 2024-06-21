@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Database } from '~/types/supabase'
+import type { userProfile } from '~/types'
 export const useUserStore = defineStore({
   id: 'UserStoreStore',
   state: () => ({
@@ -7,7 +7,7 @@ export const useUserStore = defineStore({
     isMenuOverlay: false,
     isLogoutOverlay: false,
     isSearchOverlay: false,
-    user: {} as Database['public']['Tables']['thread_profiles']['Row'],
+    user: {} as userProfile | null,
     isLoggedIn: false,
     redirectTo: '/'
   }),
@@ -21,22 +21,17 @@ export const useUserStore = defineStore({
       this.redirectTo = '/'
       navigateTo(temp)
     },
-    async getProfile(id: string) {
-      const supaClient = useSupabaseClient<Database>()
-      const { data, error } = await supaClient.from('thread_profiles').select('*').eq('user_id', id)
-      if (!error) {
-        return data
-      }
+    async getProfile(username: string) {
+      const d = await $fetch(`/api/profile/${username}`, {
+        method: 'GET',
+        headers: useRequestHeaders(['cookie']),
+      })
+      return d as userProfile | null
     },
     async myProfile() {
-      const id = useSupabaseUser().value?.id
-      if (id) {
-        const data = await this.getProfile(id)
-        if (data) {
-          this.user = data[0]
-
-        }
-      }
+      if (!this.user?.username) return
+      const d = await this.getProfile(this.user.username)
+      if (d) this.user = d
     }
   },
   persist: {

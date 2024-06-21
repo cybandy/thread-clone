@@ -8,6 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // get user data on reload
   nuxtApp.hook('app:beforeMount', () => {
+    if (useRoute().path == '/confirm') return
     useAsyncData(async () => {
       const user = useSupabaseUser()
       if (user) {

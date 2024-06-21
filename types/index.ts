@@ -1,4 +1,4 @@
-
+import type { Profile, Follow, Like } from "@prisma/client"
 export type PostImage = {
   src: string,
   alt?: string
@@ -32,3 +32,8 @@ export type ThreadFormProp = {
   ind: number,
   imgFiles?: Array<ThreadFormImage>
 }
+
+export type userProfile = {
+  followers: Follow[],
+  likes: Like[]
+} & Profile

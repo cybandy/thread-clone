@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
-const links = [
+const links = ref([
   {
     icon: 'ph:house',
     activeIcon: 'ph:house-fill',
@@ -29,7 +29,7 @@ const links = [
     },
     to: '/@' + user.value.username
   },
-]
+])
 </script>
 
 <template>

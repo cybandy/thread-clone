@@ -23,18 +23,14 @@ const loginOauth = async (prov: any) => {
       }
 
     })
-  console.log(data.url);
 
 }
 
-onMounted(() => {
-  // console.log(useRoute().query);
 
-})
 </script>
 
 <template>
-  <UContainer class="w-full h-full space-y-10">
+  <UContainer class="w-full min-h-[500px] space-y-10 grid place-content-center">
     <div class="">
       <h1 class="text-lg font-semibold leading-tight text-center">
         Log in / Sign up
@@ -42,7 +38,8 @@ onMounted(() => {
       <p class="text-gray-500" />
     </div>
     <div class="flex items-center justify-center h-full w-full">
-      <UButton color="black" label="GitHub" icon="i-simple-icons-github" block @click="() => loginOauth('github')" />
+      <UButton color="black" label="GitHub" icon="i-simple-icons-github" :block="!notMobile"
+        @click="() => loginOauth('github')" />
       <!-- <UButton color="black" label="Login with Google" icon="i-simple-icons-google" block /> -->
 
     </div>

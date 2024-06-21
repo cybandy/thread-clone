@@ -30,7 +30,7 @@ model Profile {
   //policies
   @@allow('all', auth() == user)      // user has all permissions for their profile
   @@deny('create', auth()==null)      // logged in user can create profile
-  @@deny('read',private)              // deny read if profile is set to private
+  @@allow('read', private==false)              // deny read if profile is set to private
   @@schema("public")
 }
 
@@ -93,7 +93,7 @@ model Images {
 model Follow {
   id          Int     @id @default(autoincrement())
   followerId  String  @db.Uuid
-  followingId String  @db.Uuid
+  followingId String  @db.Uuid @default(auth().id)
   follower    Profile @relation("Followers", fields: [followerId], references: [id], onDelete: Cascade)
   following   Profile @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
 

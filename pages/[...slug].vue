@@ -58,13 +58,13 @@ async function submit() {
 }
 
 async function inUpdateProfile() {
-  const d = await $fetch('/api/profile', {
+  const d = await $fetch('/api/profile/confirm', {
     // query: {
     //   where: {
     //     id: useSupabaseUser().value?.id
     //   }
     // },
-    method: 'patch',
+    method: 'post',
     headers: useRequestHeaders(['cookie'])
   })
   console.log(d)
@@ -131,8 +131,10 @@ await $fetch
       </div>
 
       <div>
-        <UButton @click="inUpdateProfile" color='black' label="fetch" />
+        <UButton color='black' label="fetch" @click="inUpdateProfile" />
       </div>
+
+
     </TemplateSectionContent>
   </div>
 

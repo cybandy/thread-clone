@@ -14,7 +14,6 @@
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
     "@zenstackhq/runtime": "2.2.3",
-    "nuxt": "^3.12.1",
     "prisma": "^5.15.0",
     "uuid": "^10.0.0",
     "vue": "^3.4.27",
@@ -30,6 +29,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "nuxt": "^3.12.2",
     "zenstack": "2.2.3"
   }
 }

@@ -4,7 +4,7 @@
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
 useHead({
-  title: user.value.name
+  title: user.value?.name
 })
 const postStore = usePostStore()
 const { posts } = storeToRefs(postStore)

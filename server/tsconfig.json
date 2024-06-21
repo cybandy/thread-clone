@@ -1,3 +1,17 @@
 {
   "extends": "../.nuxt/tsconfig.server.json",
+  "exclude": [
+    "../eslint.config.mjs"
+  ],
+  "compilerOptions": {
+    // "target": "ESNext",
+    // "module": "CommonJS",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "maxNodeModuleJsDepth": 5,
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+  }
 }

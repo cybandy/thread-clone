@@ -1,7 +1,19 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    // "target": "ESNext",
+    // "module": "CommonJS",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "maxNodeModuleJsDepth": 5,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+  },
   "exclude": [
-    "./eslint.config.mjs"
+    "node_modules",
+    "**/node_modules/*"
   ]
 }

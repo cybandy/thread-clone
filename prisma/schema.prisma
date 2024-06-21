@@ -64,7 +64,7 @@ enum one_time_token_type {
 
 /// @@allow('all', auth() == user)
 /// @@deny('create', auth() == null)
-/// @@deny('read', private)
+/// @@allow('read', private == false)
 /// My Models
 model Profile {
   id           String   @id() @db.Uuid()

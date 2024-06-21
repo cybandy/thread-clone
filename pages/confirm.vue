@@ -8,10 +8,13 @@ defineRouteRules({
 
 // function to upsert user's profile
 async function inUpdateProfile() {
-  const d = await $fetch('/api/profile', {
-    method: 'patch',
-    headers: useRequestHeaders(['cookie'])
+  const d = await $fetch('/api/profile/confirm', {
+    method: 'post',
+    headers: useRequestHeaders(['cookie']),
+    retry: 3,
+    retryDelay: 500
   })
+  if (d) userStore.user = d as any
 }
 
 watch(user, async () => {
@@ -30,5 +33,14 @@ watch(user, async () => {
 </script>
 
 <template>
-  <div>Waiting for login...</div>
+  <div class="w-full h-full">
+    <TemplateSectionContent>
+      <div class="w-full h-full grid place-content-center">
+        <div class="flex items-center w-fit gap-1">
+          <UIcon name="i-heroicons-arrow-path-rounded-square" class="w-9 h-9 animate-spin duration-100" />
+          <span class="text-base font-semibold">Loading...</span>
+        </div>
+      </div>
+    </TemplateSectionContent>
+  </div>
 </template>
