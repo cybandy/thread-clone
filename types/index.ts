@@ -32,9 +32,12 @@ export type ThreadFormProp = {
   ind: number,
   imgFiles?: Array<ThreadFormImage>
 }
-
+export interface ProfileFollow extends Follow {
+  following?: Profile,
+  followed?: Profile
+}
 export type userProfile = {
-  followers: Follow[],
-  following: Follow[],
+  followers: ProfileFollow[],
+  following: ProfileFollow[],
   likes: Like[]
 } & Profile

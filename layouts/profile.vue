@@ -77,20 +77,38 @@ async function followUser() {
           </div>
           <div>
             <USkeleton v-if="loading" class="h-16 w-16" :ui="{ rounded: 'rounded-full' }" />
-            <UAvatar v-else :src="user.avatar_url || '/dp_placeholder.jpg'" :alt="user.name || ''"
-              aria-label="profile picture" size="2xl" />
+            <UChip v-else size="md" position="bottom-left" inset
+              :ui="{ base: '-mx-2 rounded-none ring-0', background: '' }">
+              <UAvatar :src="user.avatar_url || '/dp_placeholder.jpg'" :alt="user.name || ''"
+                aria-label="profile picture" size="2xl" />
+              <template #content>
+                <UIcon v-if="user.has_verified" name="i-heroicons-check-badge-20-solid"
+                  class="w-5 h-5 text-primary-600" />
+              </template>
+            </UChip>
+
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
           <div class="flex gap-2 flex-grow">
             <USkeleton v-if="loading" class="h-3 w-[100px]" />
-            <span v-else class="break-words overflow-visible text-wrap dark:text-gray-400">{{ user.followers.length }}
-              {{ user.followers.length > 1 ? 'followers' : 'follower' }}</span>
+            <div v-else class="flex items-center gap-2">
+              <UAvatarGroup size="3xs" :max="2">
+                <UAvatar v-for="(people, ik) of user.followers" :key="ik"
+                  :src="(people.following?.avatar_url as string)" :alt="people.following?.username" />
+              </UAvatarGroup>
+              <span class="break-words overflow-visible text-wrap dark:text-gray-400">{{ user.followers.length }}
+                {{ user.followers.length > 1 ? 'followers' : 'follower' }}</span>
+            </div>
           </div>
-          <div>
+          <div class="flex items-center gap-5">
             <ULink to="https://instagram.com" target="_break">
               <UIcon name="ph:instagram-logo-light" class="w-9 h-9 cursor-pointer" />
             </ULink>
+
+            <div v-if="!isLoggedInProfile" class="relative">
+              <DropdownPost />
+            </div>
           </div>
         </div>
       </div>

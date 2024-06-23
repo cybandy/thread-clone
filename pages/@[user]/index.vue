@@ -5,7 +5,7 @@ definePageMeta({
   middleware: [
     (from, to) => {
       if (to.params['user'].length == 0) {
-        return navigateTo('/')
+        return navigateTo('/search')
       }
     }
   ]

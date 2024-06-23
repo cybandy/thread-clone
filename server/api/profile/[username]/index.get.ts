@@ -9,7 +9,16 @@ export default defineEventHandler(async (event) => {
           id: true,
           followedId: true,
           followingId: true,
-
+          following: {
+            select: {
+              id: true,
+              avatar_url: true,
+              description: true,
+              has_verified: true,
+              name: true,
+              username: true
+            }
+          }
         }
       }, likes: true
     }
