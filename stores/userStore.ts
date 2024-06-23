@@ -12,8 +12,7 @@ export const useUserStore = defineStore({
     redirectTo: '/'
   }),
   getters: {
-    // isPosts: (state) => state.posts.length > 0
-    // isLoggedIn: (state) => Boolean(0)
+    following: (state) => state.user?.following.map((x) => x.followedId)
   },
   actions: {
     navTo(path: string | null = null) {
@@ -29,9 +28,18 @@ export const useUserStore = defineStore({
       return d as userProfile | null
     },
     async myProfile() {
-      if (!this.user?.username) return
-      const d = await this.getProfile(this.user.username)
-      if (d) this.user = d
+      try {
+        const data = await $fetch('/api/profile/id', { method: 'GET' })
+        this.user = data as any
+      } catch (error) {
+        this.user = null
+      }
+    },
+
+    deleteFollowing(id: number) {
+      if (this.user) {
+        this.user.following = this.user.following.filter((x) => x.id !== id)
+      }
     }
   },
   persist: {

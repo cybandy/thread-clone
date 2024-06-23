@@ -1,13 +1,23 @@
 <script setup lang='ts'>
+import type { Thread } from '@prisma/client';
 
-
-const userStore = useUserStore()
-const { user } = storeToRefs(userStore)
-useHead({
-  title: user.value?.name
+definePageMeta({
+  middleware: [
+    (from, to) => {
+      if (to.params['user'].length == 0) {
+        return navigateTo('/')
+      }
+    }
+  ]
 })
-const postStore = usePostStore()
-const { posts } = storeToRefs(postStore)
+
+
+const username = useRoute().params['user'] as string
+
+useHead({
+  title: '@' + username || 'Profile'
+})
+const posts = [] as Thread[]
 </script>
 
 <template>

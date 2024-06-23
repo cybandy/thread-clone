@@ -24,7 +24,7 @@ model Profile {
   user         users?   @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   threads      Thread[]
   likes        Like[]
-  followers    Follow[] @relation("Followers")
+  followers    Follow[] @relation("Followed")
   following    Follow[] @relation("Following")
 
   //policies
@@ -57,7 +57,7 @@ model Thread {
   @@allow('read', permission==any)
   // @@allow('read', permission==mentions && contains(text, Author.username))
   // @@allow('read', permission==mentions && Author.username in text)
-  @@allow('read', permission==follow && Author.followers?[followerId==auth().id] )
+  @@allow('read', permission==follow && Author.followers?[followedId==auth().id] )
   @@schema("public")
 }
 
@@ -92,15 +92,15 @@ model Images {
 
 model Follow {
   id          Int     @id @default(autoincrement())
-  followerId  String  @db.Uuid
+  followedId  String  @db.Uuid
   followingId String  @db.Uuid @default(auth().id)
-  follower    Profile @relation("Followers", fields: [followerId], references: [id], onDelete: Cascade)
+  followed    Profile @relation("Followed", fields: [followedId], references: [id], onDelete: Cascade)
   following   Profile @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
 
   //policies
   @@allow('read',true)
   @@allow('create', auth()!=null)
-  @@allow('delete', auth().id==followerId)
+  @@allow('delete', auth().id==followingId)
 
   @@schema("public")
 }

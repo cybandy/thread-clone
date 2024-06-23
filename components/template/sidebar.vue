@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
-const links = ref([
+const links = computed(() => [
   {
     icon: 'ph:house',
     activeIcon: 'ph:house-fill',

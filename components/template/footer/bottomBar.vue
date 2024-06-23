@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 const userStore = useUserStore()
-const links = [
+const { user } = storeToRefs(userStore)
+const links = computed(() => [
   {
     icon: 'ph:house',
     activeIcon: 'ph:house-fill',
@@ -29,9 +30,9 @@ const links = [
   {
     icon: 'i-heroicons-user',
     activeIcon: 'i-heroicons-user-20-solid',
-    to: `/@${userStore.user.username}`
+    to: `/@${user.value ? user.value.username : ''}`
   }
-]
+])
 </script>
 
 <template>

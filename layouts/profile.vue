@@ -1,23 +1,54 @@
 <script setup lang='ts'>
+import type { Follow } from '@prisma/client';
 import type { userProfile } from '~/types';
 const userStore = useUserStore()
-// const { user } = storeToRefs(userStore)
+const { following: followingProfiles } = storeToRefs(userStore)
 const username = useRoute().params['user'] as string
 const user = ref({} as userProfile)
 const loading = ref(true)
 
-onMounted(async () => {
+const isLoggedInProfile = computed(() => userStore.user ? userStore.user.username === username : false)
 
+// determine if loggedIn user is ff current user
+const isFollowing = computed(() => followingProfiles.value?.includes(user.value.id))
+
+// get profile
+async function getProfile() {
   const d = await userStore.getProfile(username)
   if (d) {
     user.value = d
     loading.value = false
   }
+}
 
-  console.log(username);
+onMounted(async () => await getProfile())
 
-})
+const findIndex = (data: Follow[]) => {
+  return data.find((x) => x.followingId == userStore.user?.id && x.followedId == user.value.id)
+}
 
+async function followUser() {
+  try {
+    //un-follower
+    if (isFollowing.value && user.value && userStore.user) {
+      const followActive = findIndex(user.value.followers)
+      if (followActive) {
+        const d = await useCybandyPrisma().unFollowProfile(followActive.id)
+        userStore.deleteFollowing(followActive.id)
+        user.value.followers = user.value.followers.filter((x) => x.id != followActive.id)
+      }
+    }
+    //follow
+    else {
+      const d = await useCybandyPrisma().followProfile(user.value.id)
+
+      if (userStore.user) userStore.user.following.push(d)
+      user.value.followers.push(d)
+    }
+  } catch (error) {
+    //
+  }
+}
 </script>
 
 <template>
@@ -54,7 +85,7 @@ onMounted(async () => {
           <div class="flex gap-2 flex-grow">
             <USkeleton v-if="loading" class="h-3 w-[100px]" />
             <span v-else class="break-words overflow-visible text-wrap dark:text-gray-400">{{ user.followers.length }}
-              followers</span>
+              {{ user.followers.length > 1 ? 'followers' : 'follower' }}</span>
           </div>
           <div>
             <ULink to="https://instagram.com" target="_break">
@@ -65,8 +96,23 @@ onMounted(async () => {
       </div>
       <div class="pt-4 pb-2 5 px-3 md:px-6 w-full">
         <USkeleton v-if="loading" class="h-11 w-full" />
-        <UButton v-else label="Edit Profile" color="gray" variant="outline" size="lg" block
-          :ui="{ rounded: 'rounded-xl' }" />
+        <div v-else>
+          <UButton v-if="isLoggedInProfile" label="Edit Profile" color="gray" variant="outline" size="lg" block
+            :ui="{ rounded: 'rounded-xl' }" />
+          <div v-else class="grid grid-cols-2 gap-2">
+            <div>
+              <UButton :label="isFollowing ? 'Following' : 'Follow'" :color="isFollowing ? 'gray' : 'black'"
+                :variant="isFollowing ? 'outline' : 'solid'" size="lg" block :ui="{ rounded: 'rounded-xl' }"
+                @click="followUser" />
+            </div>
+            <div>
+              <UButton label="Mention" color="gray" variant="outline" size="lg" block :ui="{ rounded: 'rounded-xl' }" />
+            </div>
+
+
+          </div>
+        </div>
+
       </div>
       <div class="mb-4">
         <ProfileTab />

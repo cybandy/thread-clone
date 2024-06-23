@@ -35,5 +35,6 @@ export type ThreadFormProp = {
 
 export type userProfile = {
   followers: Follow[],
+  following: Follow[],
   likes: Like[]
 } & Profile
